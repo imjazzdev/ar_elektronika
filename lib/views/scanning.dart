@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:ar_elektronika/utils/var_global.dart';
 import 'package:ar_elektronika/views/detail.dart';
 import 'package:ar_elektronika/views/start.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,15 @@ class _ScanningPageState extends State<ScanningPage> {
 
   void closeScreen() {
     isScanCompleted = false;
+  }
+
+  void onNavigate() {
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                DetailPage(sourceImg3D: '${VarGlobal.value_path}')),
+        (route) => false);
   }
 
   @override
@@ -56,20 +66,21 @@ class _ScanningPageState extends State<ScanningPage> {
         body: MobileScanner(onDetect: (capture) {
           final List<Barcode> barcodes = capture.barcodes;
 
-          String? value;
           for (var barcode in barcodes) {
-            value = barcode.rawValue;
+            VarGlobal.value_path = barcode.rawValue!;
           }
 
           // for (var i = 1; i < 10; i++) {
           //   print('ini $i');
           // }
 
-          if (value != null) {
+          print('SCANNINGGGG');
+          if (VarGlobal.value_path != '') {
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => DetailPage(sourceImg3D: '${value}')),
+                    builder: (context) =>
+                        DetailPage(sourceImg3D: '${VarGlobal.value_path}')),
                 (route) => false);
           }
         }),

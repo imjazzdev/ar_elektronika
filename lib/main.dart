@@ -1,3 +1,4 @@
+import 'package:ar_elektronika/views/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => StartPage(),
         '/home': (context) => HomePage(),
+        // '/detail': (context) => DetailPage(),
       },
     );
   }
